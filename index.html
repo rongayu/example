@@ -1509,8 +1509,9 @@
     <script>
       (function(){
         // 点击效果
-        // 输入框被点击，占位框显示。点击其它区域，占位框隐藏。
-        // 输入框输入文字，详情框显示，数据根据输入的内容从数据对象中获取，如果有内容就显示内容，最多10条，没有内容就不显示;点击其它区域，详情框隐藏。
+        // 输入框被点击，占位框显示；点击其它区域，占位框隐藏。
+        // 输入框输入文字，占位框隐藏，详情框显示。数据根据输入的内容从数据对象中获取，如果有内容就显示内容，最多10条，
+        // 没有内容就不显示。点击其它区域，详情框隐藏。
         let element = document.querySelector("#markandsearch input");
         let placeholderbox = document.querySelector("#markandsearch .placeholderbox");
         let detailbox = document.querySelector("#markandsearch .detailbox");
@@ -1528,13 +1529,15 @@
           }
         });
         element.addEventListener("keyup",function(event){
+          placeholderbox.style.display = "none";
           detailbox.style.display = "block";
           let info = event.target.value;
-          // 当输入框的值本身为空(不经过去除首尾空格)时，占位框显示，详情框不进行添加内容。
+          // 当输入框的值本身为空(不经过去除首尾空格)时，占位框显示，详情框隐藏。
           // 输入框去除首尾的空格之后，没有值的话，详情框隐藏，占位框隐藏。
-          // 否则，(仍然有值)，那么才可以去输出符合条件的内容，详情框显示。(详情框默认会覆盖住占位框)
+          // 否则，(仍然有值)，那么才可以去输出符合条件的内容，详情框显示，占位框隐藏。
           if(info.length == 0){
             placeholderbox.style.display = "block";
+            detailbox.style.display = "none";
           }else{
             info = info.replace(/^\s+|\s+$/g, "");
             if(info.length == 0){
@@ -1554,6 +1557,7 @@
                 return "<div>" + data + "</div>";
               });
               detailbox.innerHTML = array.join("");
+              placeholderbox.style.display = "none";
             }
           }
         });
