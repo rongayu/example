@@ -47,11 +47,61 @@
         background: linear-gradient(to bottom, #eaeaea, #f8f8f8 6%);
       }
       .container{
-        width: 1183px; /*+滚动条17px=1200px*/
         margin-left: auto;
         margin-right: auto;
       }
-      
+      @media screen and (min-width: 1200px){
+        .container{
+          width: 1183px; /*+滚动条17px=1200px*/
+        }   
+      }
+      @media screen and (max-width: 992px){ /*调试992px....*/
+        .container{
+          width: 975px; /*+滚动条17px=992px*/
+        }
+        .banner .rightbox{
+          display: none;
+        }
+        .banner .leftbox{
+          width: 470px;
+        }
+        .banner .leftbox img{
+          width: 470px;
+        }
+        .banner .img_3, 
+        .banner .img_4{
+          width: 230px;
+        }
+        .gediao .column{
+          width: 290px;
+        }
+        .gediao .column img{
+          width: 290px;
+          height: 162px;
+        }
+        .youhui{
+          height: 400px;
+          background: #ff0000;
+        }
+        .maoyandianying{
+          height: 400px;
+          background: #ff0000;
+        }
+        .minsu .column{
+          width: 446px;
+        }
+        .minsu .column img{
+          width: 446px;
+          height: 250px; 
+        }
+        .guesslike{
+          height: 400px;
+          background: #ff0000;
+        }
+        .meituanservice .column{
+          width: 174px;
+        }
+      }
       /* 布局结束 */
       /* 公共样式结束 */
       /* 导航栏 */
@@ -506,31 +556,40 @@
           width: 723px;
           float: left;
         }
-        .banner img{
-          margin-left: 10px;
-          margin-top: 10px;
+        .banner .leftbox{
+          width: 548px;
+          float: left;
+          margin: 10px 10px 0 10px;
         }
-        .banner .loopbox img{
+        .banner .rightbox{
+          width: 145px;
+          float: left;
+          margin-top: 10px;
+        } 
+        .banner .leftbox img:nth-child(1){
           width: 548px;
           height: 240px;
         }
-        .banner .img_2{
+        .banner .leftbox img:nth-child(2),
+        .banner .leftbox img:nth-child(3){
+          width: 269px;
+          height: 166px;
+          margin-top: 10px;
+        }
+        .banner .leftbox img:nth-child(2){
+          margin-right: 10px;
+        }
+        .banner .rightbox img:nth-child(1){
           width: 145px;
           height: 240px;
         }
-        .banner .img_3,
-        .banner .img_4{
-          width: 269px;
-          height: 166px;
-        }
-        .banner .img_5{
+        .banner .rightbox img:nth-child(2){
           width: 145px;
           height: 166px;
+          margin-top: 10px;
         }
         .banner .loopbox{
           position: relative;
-          width: 560px;
-          float: left;
         }
         .banner .loopbox .left,
         .banner .loopbox .right{
@@ -1497,7 +1556,7 @@
       <!-- 右侧 -->
       <div class="right">
         <div class="searchbox">
-          <input type="text" value="" placeholder="搜索商家地点(输入蛋糕或冰淇淋查看点击效果)"/>
+          <input type="text" value="" placeholder="搜索商家地点(输入蛋糕或冰淇淋查看搜索的列表提示效果)"/>
           <div class="placeholderbox">热门搜索</div>
           <div class="detailbox"></div>
         </div><!--
@@ -1710,20 +1769,24 @@
         <!-- 导航栏结束 -->
         <!-- 广告栏 -->
         <div class="banner" id="banner">
-          <div class="loopbox">
-            <div class="playbox"><!-- 广告_1 --><img src="./images/banner_1.png"/></div>
-            <div class="linebox">
-              <span class="focus" data-info="1"></span>
-              <span data-info="2"></span>
-              <span data-info="3"></span>
-              <span data-info="4"></span>
+          <div class="leftbox">
+            <div class="loopbox">
+              <div class="playbox"><!-- 广告_1 --><img src="./images/banner_1.png"/></div>
+              <div class="linebox">
+                <span class="focus" data-info="1"></span>
+                <span data-info="2"></span>
+                <span data-info="3"></span>
+                <span data-info="4"></span>
+              </div>
+              <div class="left"><img src="./images/arrow_3.png"/></div><div class="right"><img src="./images/arrow_2.png"/></div>
             </div>
-            <div class="left"><img src="./images/arrow_3.png"/></div><div class="right"><img src="./images/arrow_2.png"/></div>
+            <!-- 广告_3 --><img src="./images/广告_2.png"/>
+            <!-- 广告_4 --><img src="./images/广告_3.png"/>
           </div>
-          <!-- 广告_2 --><img src="./images/广告_4.png" class="img_2"/>
-          <!-- 广告_3 --><img src="./images/广告_2.png" class="img_3"/>
-          <!-- 广告_4 --><img src="./images/广告_3.png" class="img_4"/>
-          <!-- 广告_5 --><img src="./images/广告_5.png" class="img_5"/>
+          <div class="rightbox">
+            <!-- 广告_2 --><img src="./images/广告_4.png"/>
+            <!-- 广告_5 --><img src="./images/广告_5.png"/>
+          </div>
         </div>
         <!-- 动画效果/滑过效果/点击效果 -->
         <script>
@@ -1754,7 +1817,7 @@
                 "3": `<img src="./images/banner_3.png"/>`,
                 "4": `<img src="./images/banner_4.png"/>`
               }
-            let timer = setInterval(play, 4000); //定时触发播放
+            // let timer = setInterval(play, 4000); //定时触发播放
             // 动画效果结束
 
             // 滑动效果
@@ -2345,7 +2408,7 @@
             <div class="column">
               <!-- 猜你喜欢_1 --><img src="./images/喜欢_14.png"/>
               <div class="title">老郑家东北春饼店（大运店）</div>
-              <div class="message"><!-- 评价星星 --><span class="star star_5"></span><span>2340个评价</span></div>
+              <div class="leavemessage"><!-- 评价星星 --><span class="star star_5"></span><span>2340个评价</span></div>
               大运<br/>
               <div class="price"><span>¥</span><span class="focus">88.0</span><span>起</span></div>
             </div>
