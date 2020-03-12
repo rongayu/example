@@ -1658,6 +1658,41 @@
             detailbox.style.display = "none";
           }
         });
+        
+        //详情框被点击，搜索框的内容显示为被触发点击事件的元素的内容。
+        //搜索框的keyup事件被触发且按键元素为上或下时，显示详情框的滑动效果。按键元素为回车键时，搜索框的内容显示为
+        //选中元素内的文本值,选中元素根据按键次数在子元素集合中获得，详情框隐藏。
+        detailbox.addEventListener("click",function(event){
+          if(event.target.tagName.toLowerCase = "div"){
+            element.value = event.target.innerText;
+          }
+        });
+        
+        let keyn = 0; //计上或下按键按下的次数。
+        let childs = detailbox.children;
+        element.addEventListener("keyup",function(event){
+          if(event.key == "ArrowDown" || event.key == "ArrowUp"){
+            //对keyn进行处理
+            if(event.key == "ArrowDown"){
+              keyn++; //按键次数+1
+              if(keyn == childs.length + 1){ //如果按键次数为childs.length +1，那么按键次数设置为1次。
+                keyn = 1;
+              }
+            }else if(event.key == "ArrowUp"){ //如果按键次数为0，那么按键次数设置为chids.length。
+              keyn--; //按键次数-1
+              if(keyn == 0){
+                keyn = childs.length;
+              }
+            }
+            //详情框的滑动效果 字体颜色改变，背景色改变。
+            //获取详情框的子元素，根据按键次数来决定选中子元素在元素集合中的位置。
+            childs[keyn-1].style.color = "#fe8c00";
+            childs[keyn-1].style.background = "#f8f8f8";
+          } else if(event.key == "Enter"){
+            element.value = childs[keyn-1].innerText;
+            detailbox.style.display = "none";
+          }
+        });
         // 点击效果结束
       })();
     </script>
