@@ -1408,7 +1408,7 @@
         .banner .leftbox{
           width: 470px;
         }
-        .banner .leftbox .loopbox img{
+        .banner .leftbox .playbox img{
           width: 470px;
         }
         .banner .leftbox .img_2, 
@@ -1597,13 +1597,11 @@
       </div>
       <!-- 右侧结束 -->
     </div>
-    <!-- 点击效果 -->
+    <!-- 点击效果/按键效果 -->
     <script>
       (function(){
         // 点击效果
         // 输入框被点击，占位框显示；点击其它区域，占位框隐藏。
-        // 输入框输入文字，占位框隐藏，详情框显示。数据根据输入的内容从数据对象中获取，如果有内容就显示内容，最多10条，
-        // 没有内容就不显示。点击其它区域，详情框隐藏。
         let element = document.querySelector("#markandsearch input");
         let placeholderbox = document.querySelector("#markandsearch .placeholderbox");
         let detailbox = document.querySelector("#markandsearch .detailbox");
@@ -1615,11 +1613,24 @@
         element.addEventListener("click",function(event){
           placeholderbox.style.display = "block";
         });
-        document.addEventListener("click",function(event){
-          if(element != event.target){ //输入框不是被触发点击事件的元素时，占位框隐藏。
-            placeholderbox.style.display = "none";
+        //详情框被点击，搜索框的内容显示为被触发点击事件的元素的内容。
+        detailbox.addEventListener("click",function(event){
+          if(event.target.tagName.toLowerCase = "div"){
+            element.value = event.target.innerText;
           }
         });
+        //输入框不是被触发点击事件的元素时，占位框隐藏，详情框隐藏。
+        document.addEventListener("click",function(event){
+          if(element != event.target){ 
+            placeholderbox.style.display = "none";
+            detailbox.style.display = "none";
+          }
+        });
+        // 点击效果结束
+
+        //按键效果·提示框中的内容·提示时占位框和详情框的切换效果。
+        /*输入框输入文字，占位框隐藏，详情框显示。数据根据输入的内容从数据对象中获取，如果有内容就显示内容，最多10条，
+        没有内容就不显示。点击其它区域，详情框隐藏。*/
         element.addEventListener("keyup",function(event){
           placeholderbox.style.display = "none";
           detailbox.style.display = "block";
@@ -1653,21 +1664,10 @@
             }
           }
         });
-        document.addEventListener("click",function(event){
-          if(element != event.target){ //输入框不是被触发点击事件的元素时，详情框隐藏。
-            detailbox.style.display = "none";
-          }
-        });
         
-        //详情框被点击，搜索框的内容显示为被触发点击事件的元素的内容。
-        //搜索框的keyup事件被触发且按键元素为上或下时，显示详情框的滑动效果。按键元素为回车键时，搜索框的内容显示为
-        //选中元素内的文本值,选中元素根据按键次数在子元素集合中获得，详情框隐藏。
-        detailbox.addEventListener("click",function(event){
-          if(event.target.tagName.toLowerCase = "div"){
-            element.value = event.target.innerText;
-          }
-        });
-        
+        // 按键效果·提示框中滑过效果·确认效果
+        /* 搜索框的keyup事件被触发且按键元素为上或下时，显示详情框的滑动效果。按键元素为回车键时，搜索框的内容显示为
+        选中元素内的文本值,选中元素根据按键次数在子元素集合中获得，详情框隐藏。*/
         let keyn = 0; //计上或下按键按下的次数。
         let childs = detailbox.children;
         element.addEventListener("keyup",function(event){
@@ -1693,10 +1693,10 @@
             detailbox.style.display = "none";
           }
         });
-        // 点击效果结束
+        //按键效果结束
       })();
     </script>
-    <!-- 点击效果结束 -->
+    <!-- 点击效果/按键效果结束 -->
     <!-- 网站标记和搜索栏结束 -->
 
     <!-- 网站主体 -->
